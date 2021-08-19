@@ -3,6 +3,7 @@ import { CircularProgress, Grid, Typography, InputLabel, MenuItem, FormControl, 
 
 import useStyles from './styles';
 import PlaceDetails from '../PlaceDetails/placedetails';
+import Rating from '@material-ui/lab/Rating';
 
 const List = ( {places} ) => {
     const classes = useStyles();
