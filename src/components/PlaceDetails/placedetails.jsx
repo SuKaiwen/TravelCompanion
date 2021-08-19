@@ -19,7 +19,7 @@ const PlaceDetails = ({place}) => {
             <CardContent>
                 <Typography gutterBottom variant="h5">{place.name}</Typography>
                 <Box display="flex" justifyContent="space-between">
-                    <Typography variant="subtitle1">{place.open_now_text}</Typography>
+                    <Typography variant="subtitle1" className={place.open_now_text === 'Open Now' ? classes.green : classes.red}>{place.open_now_text}</Typography>
                 </Box>
                 <Box display="flex" justifyContent="space-between">
                     <Typography variant="subtitle1">Price</Typography>

@@ -10,4 +10,10 @@ export default makeStyles(() => ({
   spacing: {
     display: 'flex', alignItems: 'center', justifyContent: 'space-between',
   },
+  green: {
+      color: '#00ff00'
+  },
+  red: {
+      color: '#ff0000'
+  },
 }));
