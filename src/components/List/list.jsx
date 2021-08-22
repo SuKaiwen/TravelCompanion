@@ -5,7 +5,7 @@ import useStyles from './styles';
 import PlaceDetails from '../PlaceDetails/placedetails';
 import Rating from '@material-ui/lab/Rating';
 
-const List = ( {places, childClicked, isLoading, type, setType, rating, setRating} ) => {
+const List = ( {places, childClicked, isLoading, type, setType, rating, setRating, price, setPrice} ) => {
     const classes = useStyles();
     const [elRefs, setElRefs] = useState([]);
 
@@ -31,7 +31,7 @@ const List = ( {places, childClicked, isLoading, type, setType, rating, setRatin
                 </Select>
             </FormControl>
             <FormControl className={classes.formControl}>
-                <InputLabel>Type</InputLabel>
+                <InputLabel>Rating</InputLabel>
                 <Select value={rating} onChange={(e) => setRating(e.target.value)}>
                     <MenuItem value={0}>Any Rating</MenuItem>
                     <MenuItem value={2}>Above 2.0</MenuItem>
@@ -39,6 +39,15 @@ const List = ( {places, childClicked, isLoading, type, setType, rating, setRatin
                     <MenuItem value={3.5}>Above 3.5</MenuItem>
                     <MenuItem value={4}>Above 4.0</MenuItem>
                     <MenuItem value={4.5}>Above 4.5</MenuItem>
+                </Select>
+            </FormControl>
+            <FormControl className={classes.formControl}>
+                <InputLabel>Price</InputLabel>
+                <Select value={price} onChange={(e) => setPrice(e.target.value)}>
+                    <MenuItem value={1}>Any $</MenuItem>
+                    <MenuItem value={2}>$$</MenuItem>
+                    <MenuItem value={3}>$$$</MenuItem>
+                    <MenuItem value={4}>$$$$</MenuItem>
                 </Select>
             </FormControl>
             <Grid container spacing={3} className={classes.list}>

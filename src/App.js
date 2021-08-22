@@ -16,6 +16,7 @@ const App = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [type, setType] = useState('restaurants');
     const [rating, setRating] = useState('');
+    const [price, setPrice] = useState('');
     const [filterPlaces, setFilterPlaces] = useState([]);
 
     useEffect(() => {
@@ -37,9 +38,26 @@ const App = () => {
     }, [type, bounds]);
 
     useEffect(() => {
+        console.log(places)
         const filteredPlaces = places.filter((place) => place.rating > rating );
         setFilterPlaces(filteredPlaces);
     }, [rating]);
+
+    useEffect(() => {
+        if(price===1){
+            const filteredPlaces = places;
+            setFilterPlaces(filteredPlaces);
+        }else if (price===2){
+            const filteredPlaces = places.filter((place) => place.price_level === '$$' || place.price_level === '$$ - $$$');
+            setFilterPlaces(filteredPlaces);
+        }else if (price===3){
+            const filteredPlaces = places.filter((place) => place.price_level === '$$ - $$$' || place.price_level === '$$$');
+            setFilterPlaces(filteredPlaces);
+        }else{
+            const filteredPlaces = places.filter((place) => place.price_level === '$$$$');
+            setFilterPlaces(filteredPlaces);
+        }
+    }, [price])
 
     return (
         <>
@@ -55,6 +73,8 @@ const App = () => {
                         setType={setType}
                         rating={rating}
                         setRating={setRating}
+                        price={price}
+                        setPrice={setPrice}
                     />
                 </Grid>
                 <Grid item xs={12} md={8}>
