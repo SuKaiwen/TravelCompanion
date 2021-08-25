@@ -44,13 +44,13 @@ const App = () => {
     }, [rating]);
 
     useEffect(() => {
-        if(price===1){
+        if(price==="$"){
             const filteredPlaces = places;
             setFilterPlaces(filteredPlaces);
-        }else if (price===2){
+        }else if (price==="$$"){
             const filteredPlaces = places.filter((place) => place.price_level === '$$' || place.price_level === '$$ - $$$');
             setFilterPlaces(filteredPlaces);
-        }else if (price===3){
+        }else if (price==="$$$"){
             const filteredPlaces = places.filter((place) => place.price_level === '$$ - $$$' || place.price_level === '$$$');
             setFilterPlaces(filteredPlaces);
         }else{

@@ -4,6 +4,7 @@ import { CircularProgress, Grid, Typography, InputLabel, MenuItem, FormControl, 
 import useStyles from './styles';
 import PlaceDetails from '../PlaceDetails/placedetails';
 import Rating from '@material-ui/lab/Rating';
+import Box from '@material-ui/core/Box';
 
 const List = ( {places, childClicked, isLoading, type, setType, rating, setRating, price, setPrice} ) => {
     const classes = useStyles();
@@ -13,9 +14,18 @@ const List = ( {places, childClicked, isLoading, type, setType, rating, setRatin
         setElRefs((refs) => Array(places?.length).fill().map((_, i) => refs[i] || createRef()));
     }, [places]);
 
+    const defaultProps = {
+      bgcolor: 'black',
+      borderColor: 'text.primary',
+      color: 'white',
+      m: 1,
+      border: 1,
+      style: { width: '30%', height: '5rem', minWidth: "200px" },
+    };
+
     return (
         <div className = {classes.container}>
-            <Typography variant="h6">Discover Restaurants, Hotels and Attractions!</Typography>
+            <Typography variant="h6">Discover more near you!</Typography>
             {isLoading? (
                 <div className={classes.loading}>
                     <CircularProgress size="5rem" />
@@ -44,12 +54,22 @@ const List = ( {places, childClicked, isLoading, type, setType, rating, setRatin
             <FormControl className={classes.formControl}>
                 <InputLabel>Price</InputLabel>
                 <Select value={price} onChange={(e) => setPrice(e.target.value)}>
-                    <MenuItem value={1}>Any $</MenuItem>
-                    <MenuItem value={2}>$$</MenuItem>
-                    <MenuItem value={3}>$$$</MenuItem>
-                    <MenuItem value={4}>$$$$</MenuItem>
+                    <MenuItem value={"$"}>Any $</MenuItem>
+                    <MenuItem value={"$$"}>$$</MenuItem>
+                    <MenuItem value={"$$$"}>$$$</MenuItem>
+                    <MenuItem value={"$$$$"}>$$$$</MenuItem>
                 </Select>
             </FormControl>
+            <Typography variant="h6" style = {{marginBottom: "15x"}}>Showing results for... </Typography>
+            <div style ={{overflowX: "scroll", display:"flex", marginBottom:"20px"}}>
+                <Box borderRadius={16} justifyContent="center" display="flex" alignItems="center" fontSize="20px" fontWeight="fontWeightBold" {...defaultProps}>{type.toUpperCase()}</Box>
+                <Box borderRadius={16} justifyContent="center" display="flex" alignItems="center" fontSize="20px" fontWeight="fontWeightBold" {...defaultProps}>{
+                    rating? <Rating size="small" value={Number(rating)} precision={0.5} readOnly />:"Any Rating".toUpperCase()
+                }</Box>
+                <Box borderRadius={16} justifyContent="center" display="flex" alignItems="center" fontSize="20px" fontWeight="fontWeightBold" {...defaultProps}>{
+                    price? (price).toUpperCase():"Any Price".toUpperCase()
+                }</Box>
+            </div>
             <Grid container spacing={3} className={classes.list}>
                 {places?.map((place, i) => (
                     <Grid ref={elRefs[i]} item key={i} xs={12}>
